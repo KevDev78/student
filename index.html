@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Academic Planner</title>
+  <link rel="stylesheet" href="styles/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    .calendar-content {
+      display: flex;
+      flex-direction: row;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    #calendarGrid {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    #eventsList {
+      flex: 1;
+      min-width: 250px;
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 15px;
+      border-radius: 8px;
+    }
+
+    .calendar-day {
+      background-color: rgba(255, 255, 255, 0.15);
+      padding: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .calendar-day:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .calendar-day.has-event {
+      background-color: #2d88ff;
+      color: white;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="background-overlay"></div>
+  <div class="container">
+    <header>
+      <h1>Student Academic Planner</h1>
+      <p class="subtitle">Plan smarter. Stress less. Achieve more.</p>
+    </header>
+
+    <nav class="main-nav">
+      <button onclick="showSection('home')">Home</button>
+      <button onclick="showSection('subjects')">Subjects</button>
+      <button onclick="showSection('todo')">To-Do</button>
+      <button onclick="showSection('calendar')">Calendar</button>
+      <button onclick="showSection('timer')">Study Timer</button>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="section active">
+      <div class="welcome-container">
+        <h2 class="welcome-text">Welcome!</h2>
+        <div id="quote-wrapper">
+          <p id="quote" class="animated-quote">"Believe you can and you're halfway there."</p>
+        </div>
+        <button onclick="changeQuote()">New Quote</button>
+      </div>
+    </section>
+
+    <!-- Subjects Section -->
+    <section id="subjects" class="section">
+      <h2>Your Subjects & Grades</h2>
+      <ul id="subjectsContainer">Loading...</ul>
+    </section>
+
+    <!-- To-Do Section -->
+    <section id="todo" class="section">
+      <h2>To-Do List</h2>
+      <input type="text" id="taskInput" placeholder="Add a new task..." />
+      <button onclick="addTask()">Add Task</button>
+      <ul id="taskList"></ul>
+    </section>
+
+    <!-- Calendar Section -->
+    <section id="calendar" class="section">
+      <h2>Calendar View</h2>
+      <div id="calendarContainer">
+        <div id="calendarHeader">
+          <button id="prevMonth">←</button>
+          <span id="monthYear"></span>
+          <button id="nextMonth">→</button>
+        </div>
+        <div class="calendar-content">
+          <div id="calendarGrid">
+            <div>Sun</div><div>Mon</div><div>Tue</div>
+            <div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+          </div>
+          <div id="eventsList"><em>Select a day to view/add events</em></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Study Timer Section -->
+    <section id="timer" class="section">
+      <h2>Pomodoro Timer</h2>
+      <div id="timerDisplay">25:00</div>
+      <button onclick="startTimer()">Start</button>
+      <button onclick="resetTimer()">Reset</button>
+    </section>
+  </div>
+
+  <!-- External script first -->
+  <script src="scripts/script.js" defer></script>
+
+  <!-- Then inline script -->
+  <script defer>
+    // Load grades from JSON
+    function loadGrades() {
+      fetch('grades.json')
+        .then(res => {
+          if (!res.ok) throw new Error('Failed to fetch grades');
+          return res.json();
+        })
+        .then(data => {
+          const container = document.getElementById('subjectsContainer');
+          container.innerHTML = '';
+          data.forEach(({ subject, grade }) => {
+            const li = document.createElement('li');
+            li.textContent = `${subject}: ${grade}`;
+            container.appendChild(li);
+          });
+        })
+        .catch(err => {
+          console.error(err);
+          document.getElementById('subjectsContainer').textContent = 'Failed to load grades.';
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', loadGrades);
+  </script>
+</body>
+</html>

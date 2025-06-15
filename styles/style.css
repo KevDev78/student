@@ -1,0 +1,246 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: url('https://cdn.pixabay.com/photo/2024/11/04/14/45/flower-9173953_1280.png') no-repeat center center fixed;
+  background-size: cover;
+  color: #fff;
+  padding: 20px;
+  position: relative;
+}
+
+.background-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 0;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 30px;
+  border-radius: 12px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+  z-index: 1;
+  position: relative;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+header h1 {
+  font-size: 2.5em;
+  color: #fff;
+}
+
+.subtitle {
+  color: #ccc;
+  font-style: italic;
+  margin-top: 8px;
+  font-size: 1.2em;
+}
+
+.main-nav {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.main-nav button {
+  background-color: #2d88ff;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  margin: 5px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.main-nav button:hover {
+  background-color: #1a5ecc;
+}
+
+.section {
+  display: none;
+}
+
+.section.active {
+  display: block;
+}
+
+/* Welcome & Quote */
+.welcome-container {
+  text-align: center;
+  margin-top: 60px;
+}
+
+.welcome-text {
+  font-size: 4rem;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 30px;
+}
+
+#quote-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
+  margin-bottom: 20px;
+}
+
+#quote {
+  font-size: 2rem;
+  font-family: 'Pacifico', cursive;
+  text-align: center;
+  color: #fff;
+  padding: 0 20px;
+  max-width: 80%;
+  background: none;
+  box-shadow: none;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+#quote.fade-out {
+  animation: fadeOut 0.5s forwards;
+}
+
+#quote.fade-in {
+  animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+/* Other Sections */
+#subjectsContainer,
+#taskList,
+#calendarGrid {
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
+}
+
+input[type="text"] {
+  padding: 10px;
+  width: 70%;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: none;
+}
+
+button {
+  padding: 8px 12px;
+  margin: 5px;
+  border-radius: 6px;
+  border: none;
+  background-color: #2d88ff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #1a5ecc;
+}
+
+#calendarGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  margin-top: 10px;
+}
+
+#calendarHeader {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+/* Timer */
+#timerDisplay {
+  font-size: 3rem;
+  text-align: center;
+  margin: 20px 0;
+}
+
+/* === Calendar Styles === */
+
+#calendarGrid div {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  min-height: 60px;
+  transition: background 0.3s;
+}
+
+#calendarGrid div:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+#calendarGrid .has-event {
+  border: 2px solid #ffd700;
+  font-weight: bold;
+}
+
+#calendarGrid .blank-day {
+  background: transparent;
+  cursor: default;
+}
+
+#eventsList {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+#eventsList h3,
+#eventsList h4 {
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+  color: #ffd700;
+}
+
+#eventsList ul {
+  list-style: disc;
+  margin-left: 20px;
+}
+
+#eventsList ul li {
+  margin-bottom: 6px;
+}
