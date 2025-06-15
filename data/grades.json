@@ -1,7 +1,5 @@
-[
-  { "subject": "Math", "grade": "A+" },
-  { "subject": "Physics", "grade": "A" },
-  { "subject": "Chemistry", "grade": "B+" },
-  { "subject": "English", "grade": "A-" },
-  { "subject": "Computer Science", "grade": "A+" }
-]
+const gradesData = [
+  { "subject": "Math", "grade": "A" },
+  { "subject": "English", "grade": "B+" },
+  { "subject": "History", "grade": "A-" }
+];
