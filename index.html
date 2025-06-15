@@ -118,31 +118,25 @@
     </section>
   </div>
 
-  <!-- External script first -->
+  <!-- External scripts -->
+  <script src="data/grades.js" defer></script>
   <script src="scripts/script.js" defer></script>
 
-  <!-- Then inline script -->
+  <!-- Inline script -->
   <script defer>
-    // Load grades from JSON
     function loadGrades() {
-      fetch('grades.json')
-        .then(res => {
-          if (!res.ok) throw new Error('Failed to fetch grades');
-          return res.json();
-        })
-        .then(data => {
-          const container = document.getElementById('subjectsContainer');
-          container.innerHTML = '';
-          data.forEach(({ subject, grade }) => {
-            const li = document.createElement('li');
-            li.textContent = `${subject}: ${grade}`;
-            container.appendChild(li);
-          });
-        })
-        .catch(err => {
-          console.error(err);
-          document.getElementById('subjectsContainer').textContent = 'Failed to load grades.';
-        });
+      const container = document.getElementById('subjectsContainer');
+      container.innerHTML = '';
+      if (!gradesData || !Array.isArray(gradesData)) {
+        container.textContent = 'Failed to load grades.';
+        return;
+      }
+
+      gradesData.forEach(({ subject, grade }) => {
+        const li = document.createElement('li');
+        li.textContent = `${subject}: ${grade}`;
+        container.appendChild(li);
+      });
     }
 
     document.addEventListener('DOMContentLoaded', loadGrades);
